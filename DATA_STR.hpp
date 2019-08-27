@@ -1,37 +1,61 @@
 #include<iostream>
-#include<stdio.h>
 
 using namespace std;
 
-/***********************ÏßĞÔ±í***********************/
-//Ë³Ğò±í
-#define maxsize_seqlist 1000
-typedef int datatype_seqlist;
-typedef struct seqlist{						 
-	datatype_seqlist data[maxsize_seqlist];//Êı¾İÏî£¬a0²»ÓÃ
-	int last;//¼ÇÂ¼±í³¤
-}sequenlist;
-
-class Tlinear_list{	//ÏßĞÔ±í 
+/***********************çº¿æ€§è¡¨***********************/
+//é¡ºåºè¡¨
+typedef int dataType_seqlist;
+typedef int dataType_linklist;
+class Tlinear_list{	//çº¿æ€§è¡¨ 
 	public:
-		class Tsequen_list{	//Ë³Ğò±í 
-			public:         
-				sequenlist *Tdata;	//ÀàÖĞÊı¾İ
+		class Tsequen_list{	//é¡ºåºè¡¨ 
+			public:
+				Tsequen_list(int size){		//åˆå§‹åŒ–ç©ºè¡¨
+					maxsize_seqlist = size + 1;
+					length = 0;
+					data = new dataType_seqlist[maxsize_seqlist];
+				}
+				~Tsequen_list(){
+					delete []data;
+				}
+				void setNull();											//ç½®ç©ºè¡¨
+				int getLength();										//æ±‚é•¿åº¦
+				dataType_seqlist getNote(int position);					//å–ç»“ç‚¹ 
+				bool insertNote(dataType_seqlist value, int position);	//æ’å…¥
+				bool pushBack(dataType_seqlist value);					//è¡¨æœ«å°¾æ’å…¥ç»“ç‚¹
+				int getNotePos(dataType_seqlist value);					//æŸ¥æ‰¾
+				bool delPos(int position);								//åˆ é™¤(ä½ç½®)
+				bool delNote(dataType_seqlist value);					//åˆ é™¤æ‰€æœ‰å€¼ä¸ºxçš„ç»“ç‚¹
+				void printSeqList();									//è¾“å‡º
+				bool scanSeqList();										//è¾“å…¥
+			private:
+				int maxsize_seqlist;	//è¡¨å¼€è¾Ÿç©ºé—´çš„æœ€å¤§é•¿åº¦
+				dataType_seqlist *data;	//æ•°æ®é¡¹ï¼Œdata[0]ä¸ç”¨
+				int length;				//è®°å½•è¡¨é•¿
+		};
 
-				sequenlist *initSeqList();					//½¨¿Õ±í 
-				void setNull(sequenlist *L);				//ÖÃ¿Õ±í
-				int length(sequenlist *L);					//Çó³¤¶È
-				datatype_seqlist get(sequenlist *L,int i);	//È¡½áµã 
-				int insert(sequenlist *L, datatype_seqlist x, int i);	//²åÈë
-				int _delete(sequenlist *L, int i);			//É¾³ı(Î»ÖÃ)
-				int locate(sequenlist *L, datatype_seqlist x);		//²éÕÒ
-				int delNote(sequenlist *L, datatype_seqlist x);//É¾³ıËùÓĞÖµÎªxµÄ½áµã
-				void printSeqList(sequenlist *L);			//Êä³ö
-				int scanSeqList(sequenlist *L);
+		class Tlink_list{	//å•é“¾è¡¨
+			public:
+				Tlink_list(){		//åˆå§‹åŒ–ç©ºè¡¨(å¤´ç»“ç‚¹)
+					head = new note;
+					head->next = NULL;
+				}
+				~Tlink_list(){
 
+				}
+				bool pushFront(dataType_linklist data);	//è¡¨å¤´æ’å…¥ç»“ç‚¹
+				bool pushBack(dataType_linklist data);	//è¡¨å°¾æ’å…¥ç»“ç‚¹
+			private:
+				typedef struct note{//å•é“¾è¡¨ç»“ç‚¹ç»“æ„ä½“
+					dataType_linklist data;
+					struct note *next;
+				};
+				
+				note *head;			//å¤´æŒ‡é’ˆ
+				
 		};
 };
 
-//µ¥Á´±í
+
 
 
